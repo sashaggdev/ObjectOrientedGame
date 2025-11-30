@@ -1,8 +1,12 @@
 PaintArea paint;
 Level level;
+import processing.sound.*;
+SoundFile fireSound;
 
 void setup() {
-  size(800, 600);
+  size(400, 400);
+  
+  fireSound = new SoundFile(this, "FireSoundEdit.wav");
   paint = new PaintArea();
   level = new Level();
 }

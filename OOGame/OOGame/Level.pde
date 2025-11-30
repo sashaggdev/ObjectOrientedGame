@@ -14,11 +14,11 @@ class Level {
     walls.add(new Wall(400, 400, 250, 25));
 
     // Hazards
-    hazards.add(new Hazard(350, 200, 50, 50));
-    hazards.add(new Hazard(600, 100, 50, 50));
+    hazards.add(new Hazard(350, 200, 50, 50, fireSound));
+    hazards.add(new Hazard(600, 100, 50, 50, fireSound));
 
     // Goal
-    goal = new Goal(720, 520, 50, 50);
+    goal = new Goal(300, 300, 50, 50);
   }
 
   void update() {
@@ -37,7 +37,7 @@ class Level {
       }
     }
 
-    // Goal reached (ADD end screen trigger)
+    // Goal reached (ADD end screen triger)
     if (goal.reached(ball)) {
       println("YOU WIN!");
     }
