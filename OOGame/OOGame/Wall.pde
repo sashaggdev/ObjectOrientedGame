@@ -42,20 +42,16 @@ void checkCollision(Ball b) {
 
     if (side == 0) {
       b.x = x - b.w;
-      b.bounceX();
     }
     else if (side == 1) {
       b.x = x + w;
-      b.bounceX();
     }
     else if (side == 2) {
       b.y = y - b.h;
-      b.bounceY();
     }
     else if (side == 3) {
       b.y = y + h;
-      b.bounceY();
     }
   }
-}
+ }
 }

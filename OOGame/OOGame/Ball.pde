@@ -1,70 +1,53 @@
 class Ball extends GameObject {
-  float vx = 4;
-  float vy = 3;
+  PVector vel;
   SoundFile bounceSound;
 
   Ball(float x, float y, SoundFile s) {
     super(x, y, 20, 20);
     bounceSound = s;
+    vel = new PVector(4, 3); // initial velocity
   }
 
-  void update() {
-    float nextX = x + vx;
-    float nextY = y + vy;
+void update() {
+    float nextX = x + vel.x;
+    float nextY = y + vel.y;
 
-    boolean bounced = false;  // track if we should play sound
+    boolean bounced = false;
 
-    // Screen Edge
-    if (nextX < 0) {
-      x = 0;
-      vx *= -1;
-      bounced = true;
-    } else if (nextX > width - w) {
-      x = width - w;
-      vx *= -1;
-      bounced = true;
+    // Screen edge bounce
+    if (nextX < 0 || nextX > width - w) {
+        vel.x *= -1;
+        bounced = true;
+    }
+    if (nextY < 0 || nextY > height - h) {
+        vel.y *= -1;
+        bounced = true;
     }
 
-    if (nextY < 0) {
-      y = 0;
-      vy *= -1;
-      bounced = true;
-    } else if (nextY > height - h) {
-      y = height - h;
-      vy *= -1;
-      bounced = true;
-    }
-
-    // Paint edge
+    // Paint edge bounce
     if (paint.isPainted(nextX, nextY)) {
-      x = nextX;
-      y = nextY;
+        x = nextX;
+        y = nextY;
     } else {
-      if (!paint.isPainted(x + vx, y)) {
-        vx *= -1;
-        bounced = true;
-      }
-      if (!paint.isPainted(x, y + vy)) {
-        vy *= -1;
-        bounced = true;
-      }
+        if (!paint.isPainted(x + vel.x, y)) {
+            vel.x *= -1;
+            bounced = true;
+        }
+        if (!paint.isPainted(x, y + vel.y)) {
+            vel.y *= -1;
+            bounced = true;
+        }
     }
-    
-    // Play bounce sound
+
+    // Bounce sound
     if (bounced && bounceSound != null) {
-      bounceSound.play();
+        bounceSound.play();
+
+        //Randomize direction
+        float angleOffset = radians(random(-20, 20)); // rotate velocity by -20° to 20°
+        vel.rotate(angleOffset);
     }
-  }
-
-  void bounceX() {
-    vx *= -1;
-    if (bounceSound != null) bounceSound.play();
-  }
-
-  void bounceY() {
-    vy *= -1;
-    if (bounceSound != null) bounceSound.play();
-  }
+}
 
   void display() {
     fill(255, 200, 0);
