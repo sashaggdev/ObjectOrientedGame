@@ -24,7 +24,7 @@ void draw() {
   level.display();
 
   // Instructions
-  fill(255);
+  fill(0, 255, 0);
   text("PAINT A PATH TO THE GREEN GOAL", 10, 20);
   //text("RED = DEATH   GREY = WALL", 10, 40);
 }

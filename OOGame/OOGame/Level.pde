@@ -8,26 +8,31 @@ class Level {
   Level() {
     reset();
 
-    // Walls
-    walls.add(new Wall(200, 150, 300, 25));
-    walls.add(new Wall(150, 300, 25, 200));
-    walls.add(new Wall(400, 400, 250, 25));
+    float gap = 200;  // width of the opening in the middle
 
-    // Hazards
-    hazards.add(new Hazard(350, 200, 50, 50, fireSound));
-    hazards.add(new Hazard(600, 100, 50, 50, fireSound));
+    // Horizontal wall 
+    walls.add(new Wall(0, height/2 - 15, width/2 - gap/2, 30));
+    walls.add(new Wall(width/2 + gap/2, height/2 - 15, width/2 - gap/2, 30));
+    
+    // Vertical wall
+    walls.add(new Wall(width/2 - 15, 0, 30, height/2 - gap/2)); 
+    walls.add(new Wall(width/2 - 15, height/2 + gap/2, 30, height/2 - gap/2)); 
+
+
+    // Middle hazard
+    float newSize = 25;
+    hazards.add(new Hazard(width/2 - newSize/2, height/2 - newSize/2, newSize, newSize, fireSound));
+
 
     // Goal
-    goal = new Goal(300, 300, 50, 50);
+    goal = new Goal(width - 80, height - 80, 50, 50);
   }
 
   void update() {
     ball.update();
 
     // Wall collision
-    for (Wall w : walls) {
-      w.checkCollision(ball);
-    }
+    for (Wall w : walls) w.checkCollision(ball);
 
     // Hazard collision
     for (Hazard h : hazards) {
@@ -37,7 +42,7 @@ class Level {
       }
     }
 
-    // Goal reached (ADD end screen triger)
+    // Goal reached
     if (goal.reached(ball)) {
       println("YOU WIN!");
     }
@@ -51,6 +56,9 @@ class Level {
   }
 
   void reset() {
-    ball = new Ball(60, 60);
+    
+    // Ball starts in upper-left with painted area around it
+    ball = new Ball(60, 60, bounceSound);
+    paint.paint(ball.x + ball.w/2, ball.y + ball.h/2, 80); // initial painted circle
   }
 }
