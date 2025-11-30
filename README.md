@@ -1,2 +1,4 @@
-This is a read me, you need to read it.
-Also, Half Life 3 totally dropping today.
+Assets used:
+
+Fire sound: https://pixabay.com/sound-effects/fire-sound-effects-224089/
+Bounce sound: https://pixabay.com/sound-effects/bounce-8111/
