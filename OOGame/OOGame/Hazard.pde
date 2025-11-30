@@ -1,9 +1,12 @@
 // Hazard object.
 
 class Hazard extends GameObject {
+  
+  SoundFile fireSound;
 
-  Hazard(float x, float y, float w, float h) {
+  Hazard(float x, float y, float w, float h, SoundFile s) {
     super(x, y, w, h);
+    fireSound = s;
   }
 
   void update() {}
@@ -14,6 +17,10 @@ class Hazard extends GameObject {
   }
 
   boolean hits(Ball b) {
-    return b.intersects(this);
+       if (b.intersects(this)) {
+      fireSound.play();
+      return true;
+    }
+    return false;
   }
 }
