@@ -2,11 +2,13 @@ PaintArea paint;
 Level level;
 import processing.sound.*;
 SoundFile fireSound;
+SoundFile bounceSound;
 
 void setup() {
   size(400, 400);
   
   fireSound = new SoundFile(this, "FireSoundEdit.wav");
+  bounceSound = new SoundFile(this, "Bounce.wav");
   paint = new PaintArea();
   level = new Level();
 }

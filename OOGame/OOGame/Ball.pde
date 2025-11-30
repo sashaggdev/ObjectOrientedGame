@@ -1,6 +1,7 @@
 class Ball extends GameObject {
   float vx = 4;
   float vy = 3;
+  SoundFile bounceSound;
 
   Ball(float x, float y) {
     super(x, y, 20, 20);
