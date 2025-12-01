@@ -24,9 +24,19 @@ void draw() {
   level.display();
 
   // Instructions
+  textSize(32);
   fill(0, 255, 0);
   text("PAINT A PATH TO THE GREEN GOAL", 10, 20);
   //text("RED = DEATH   GREY = WALL", 10, 40);
+  
+  if (level.won) {
+  fill(0, 255, 0);
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  text("YOU WIN!", width/2, height/2);
+  textAlign(LEFT, BASELINE); // reset align
+}
+
 }
 
 void mouseDragged() {

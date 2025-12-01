@@ -1,6 +1,9 @@
 class Level {
   Ball ball;
   Goal goal;
+  boolean won = false;
+  int winTime = 0;
+  int winDelay = 2000; // 2 seconds before reset
 
   ArrayList<Wall> walls = new ArrayList<Wall>();
   ArrayList<Hazard> hazards = new ArrayList<Hazard>();
@@ -42,9 +45,14 @@ class Level {
       }
     }
 
-    // Goal reached
-    if (goal.reached(ball)) {
-      println("YOU WIN!");
+    if (goal.reached(ball) && !won) {
+      won = true;
+      winTime = millis();
+    }
+    
+    if (won && millis() - winTime > winDelay) {
+      reset();
+      won = false;
     }
   }
 
@@ -56,9 +64,13 @@ class Level {
   }
 
   void reset() {
-    
-    // Ball starts in upper-left with painted area around it
+   
     ball = new Ball(60, 60, bounceSound);
-    paint.paint(ball.x + ball.w/2, ball.y + ball.h/2, 80); // initial painted circle
+
+    // Clear all old paint
+    paint.clear();
+
+    // Paint a fresh starting area around the ball
+    paint.paint(ball.x + ball.w/2, ball.y + ball.h/2, 80);
   }
 }

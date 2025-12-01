@@ -7,6 +7,13 @@ class PaintArea {
     layer.background(0);
     layer.endDraw();
   }
+  
+  // Clear painted area
+  void clear() {
+  layer.beginDraw();
+  layer.background(0);
+  layer.endDraw();
+}
 
   void paint(float x, float y, float size) {
     layer.beginDraw();
